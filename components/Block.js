@@ -3,7 +3,7 @@ import { StyleSheet, View, Animated } from 'react-native';
 
 import { theme } from '../constants';
 
-export function Block(props) {
+export default function Block(props) {
   const handleMargins = () => {
     const { margin } = props;
     if (typeof margin === 'number') {

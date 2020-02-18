@@ -1,14 +1,35 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, FlatList, Image, Dimensions } from 'react-native';
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
 
-const Welcome = () => {
-  const renderIllustrations = () => (
-    <Block>
-      <Text>Image</Text>
-    </Block>
-  );
+const { width, height } = Dimensions.get('window');
+
+const Welcome = props => {
+  const [date, setDate] = useState();
+  const renderIllustrations = () => {
+    const { illustrations } = props;
+    return (
+      <FlatList
+        horizontal
+        paddingEnabled
+        scrollEnabled
+        showHorizontalScrollIndicator={false}
+        scrollEventThrottle={16}
+        snapToAlignment="center"
+        data={illustrations}
+        extraDate={date}
+        keyExtractor={(item, index) => `${item.id}`}
+        renderItem={({ item }) => (
+          <Image
+            source={item.source}
+            resizeMode="contain"
+            style={styles.image}
+          />
+        )}
+      />
+    );
+  };
   const renderSteps = () => (
     <Block>
       <Text>* * *</Text>
@@ -56,10 +77,22 @@ Welcome.navigationOptions = {
   header: null,
 };
 
+Welcome.defaultProps = {
+  illustrations: [
+    { id: 1, source: require('../assets/images/illustration_1.png') },
+    { id: 2, source: require('../assets/images/illustration_2.png') },
+    { id: 3, source: require('../assets/images/illustration_3.png') },
+  ],
+};
+
 const styles = StyleSheet.create({
   description: {
     marginTop: theme.sizes.padding / 2,
     color: theme.colors.gray2,
+  },
+  image: {
+    width,
+    height: height / 2,
   },
 });
 

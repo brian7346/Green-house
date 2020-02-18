@@ -70,6 +70,14 @@ const explore = [
   require('../assets/images/explore_6.png'),
 ];
 
-const profile = [];
+const profile = {
+  username: 'Violet',
+  location: 'Europe',
+  email: 'violet@gmail.com',
+  budget: 2400,
+  monthlyCap: 6000,
+  notification: true,
+  newsletter: false,
+};
 
 export { categories, products, explore, profile };

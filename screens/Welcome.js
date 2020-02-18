@@ -1,9 +1,19 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Block, Text } from '../components';
+import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
 
 const Welcome = () => {
+  const renderIllustrations = () => (
+    <Block>
+      <Text>Image</Text>
+    </Block>
+  );
+  const renderSteps = () => (
+    <Block>
+      <Text>* * *</Text>
+    </Block>
+  );
   return (
     <Block center middle>
       <Block center middle flex={0.3}>
@@ -13,12 +23,30 @@ const Welcome = () => {
             Greener.
           </Text>
         </Text>
-        <Text h3 gray2 style={styles.description}>
+        <Text h3 style={styles.description}>
           Enjoy the experience
         </Text>
       </Block>
       <Block>
-        <Text>Welcome</Text>
+        {renderIllustrations()}
+        {renderSteps()}
+      </Block>
+      <Block middle flex={0.5} margin={theme.sizes.padding * 2}>
+        <Button color="primary" onPress={() => null}>
+          <Text center semibold>
+            Login
+          </Text>
+        </Button>
+        <Button shadow onPress={() => null}>
+          <Text center semibold>
+            Signup
+          </Text>
+        </Button>
+        <Button color="transparent" onPress={() => null}>
+          <Text center semibold>
+            Terms of service
+          </Text>
+        </Button>
       </Block>
     </Block>
   );
@@ -31,6 +59,7 @@ Welcome.navigationOptions = {
 const styles = StyleSheet.create({
   description: {
     marginTop: theme.sizes.padding / 2,
+    color: theme.colors.gray2,
   },
 });
 

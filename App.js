@@ -11,9 +11,14 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import Navigation from './navigation';
+import { Block } from './components/';
 
 const App: () => React$Node = () => {
-  return <Navigation />;
+  return (
+    <Block>
+      <Navigation />
+    </Block>
+  );
 };
 
 const styles = StyleSheet.create({});

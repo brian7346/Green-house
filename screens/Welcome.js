@@ -15,8 +15,8 @@ const Welcome = () => {
     </Block>
   );
   return (
-    <Block center middle>
-      <Block center middle flex={0.3}>
+    <Block>
+      <Block center middle>
         <Text h1 center bold>
           Tour Home.
           <Text h1 primary>
@@ -27,13 +27,13 @@ const Welcome = () => {
           Enjoy the experience
         </Text>
       </Block>
-      <Block>
+      <Block center middle>
         {renderIllustrations()}
         {renderSteps()}
       </Block>
-      <Block middle flex={0.5} margin={theme.sizes.padding * 2}>
+      <Block middle margin={theme.sizes.padding * 2}>
         <Button color="primary" onPress={() => null}>
-          <Text center semibold>
+          <Text center semibold white>
             Login
           </Text>
         </Button>
@@ -43,7 +43,7 @@ const Welcome = () => {
           </Text>
         </Button>
         <Button color="transparent" onPress={() => null}>
-          <Text center semibold>
+          <Text center capiton gray>
             Terms of service
           </Text>
         </Button>

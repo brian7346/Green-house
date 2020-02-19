@@ -259,7 +259,7 @@ export const styles = StyleSheet.create({
   gray: {
     backgroundColor: theme.colors.gray,
   },
-  gray2: { 
+  gray2: {
     backgroundColor: theme.colors.gray2,
   },
 });

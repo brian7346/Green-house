@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   Dimensions,
+  Modal,
 } from 'react-native';
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
@@ -12,7 +13,9 @@ import { theme } from '../constants';
 const { width, height } = Dimensions.get('window');
 
 const Welcome: () => React$Node = props => {
+  const { navigation } = props;
   const [date] = useState();
+  const [showTerms, setShowTerms] = useState(false);
   const [fadeAnim] = useState(new Animated.Value(0));
   const [scrollX] = useState(new Animated.Value(0));
 
@@ -25,6 +28,7 @@ const Welcome: () => React$Node = props => {
   useEffect(() => {
     buildAnimatedTiming(fadeAnim, 1, 1000);
   }, [fadeAnim]);
+
   const renderIllustrations = () => {
     const { illustrations } = props;
     return (
@@ -77,6 +81,13 @@ const Welcome: () => React$Node = props => {
       </Block>
     );
   };
+  const renderTermsService = () => {
+    return (
+      <Modal animationType="slide" visible={showTerms}>
+        <Text>Modal</Text>
+      </Modal>
+    );
+  };
 
   return (
     <Block animated style={{ opacity: fadeAnim }}>
@@ -96,22 +107,23 @@ const Welcome: () => React$Node = props => {
         {renderSteps()}
       </Block>
       <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
-        <Button color="primary" onPress={() => null}>
+        <Button color="primary" onPress={() => navigation.navigate('Signup')}>
           <Text center semibold white>
             Login
           </Text>
         </Button>
-        <Button shadow onPress={() => null}>
+        <Button shadow onPress={() => navigation.navigate('Signup')}>
           <Text center semibold>
             Signup
           </Text>
         </Button>
-        <Button color="transparent" onPress={() => null}>
+        <Button color="transparent" onPress={() => setShowTerms(true)}>
           <Text center capiton gray>
             Terms of service
           </Text>
         </Button>
       </Block>
+      {renderTermsService()}
     </Block>
   );
 };
@@ -141,7 +153,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: theme.sizes.base * 6,
   },
   steps: {
     width: 5,

@@ -1,11 +1,20 @@
+//@flow
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { theme } from '../constants';
 
-const Button = props => {
-  const { style, opacity, color, shadow, children } = props;
+type Props = {
+  opacity?: number,
+  color?: string,
+  shadow?: boolean,
+  style?: any,
+  children?: any,
+};
 
-  const buttonStyles = [
+const Button = (props: Props): React$Node => {
+  const { style, color, shadow, children } = props;
+
+  const buttonStyles: Array<any> = [
     styles.button,
     shadow && styles.shadow,
     color && styles[color], // predefined styles colors for backgroundColor
@@ -25,8 +34,6 @@ Button.defaultProps = {
   color: theme.colors.white,
 };
 
-export default Button;
-
 const styles = StyleSheet.create({
   button: {
     borderRadius: theme.sizes.radius,
@@ -40,14 +47,36 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
   },
-  accent: { backgroundColor: theme.colors.accent },
-  primary: { backgroundColor: theme.colors.primary },
-  secondary: { backgroundColor: theme.colors.secondary },
-  tertiary: { backgroundColor: theme.colors.tertiary },
-  black: { backgroundColor: theme.colors.black },
-  white: { backgroundColor: theme.colors.white },
-  gray: { backgroundColor: theme.colors.gray },
-  gray2: { backgroundColor: theme.colors.gray2 },
-  gray3: { backgroundColor: theme.colors.gray3 },
-  gray4: { backgroundColor: theme.colors.gray4 },
+  accent: {
+    backgroundColor: theme.colors.accent,
+  },
+  primary: {
+    backgroundColor: theme.colors.primary,
+  },
+  secondary: {
+    backgroundColor: theme.colors.secondary,
+  },
+  tertiary: {
+    backgroundColor: theme.colors.tertiary,
+  },
+  black: {
+    backgroundColor: theme.colors.black,
+  },
+  white: {
+    backgroundColor: theme.colors.white,
+  },
+  gray: {
+    backgroundColor: theme.colors.gray,
+  },
+  gray2: {
+    backgroundColor: theme.colors.gray2,
+  },
+  gray3: {
+    backgroundColor: theme.colors.gray3,
+  },
+  gray4: {
+    backgroundColor: theme.colors.gray4,
+  },
 });
+
+export default Button;

@@ -5,7 +5,7 @@ import { StyleSheet, View, Animated } from 'react-native';
 import { theme } from '../constants';
 
 type Props = {
-  flex?: number,
+  flex?: number | boolean,
   row?: boolean,
   column?: boolean,
   center?: boolean,

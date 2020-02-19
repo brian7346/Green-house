@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
-import { StyleSheet, FlatList, Image, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  Animated,
+  StyleSheet,
+  FlatList,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
 
 const { width, height } = Dimensions.get('window');
 
 const Welcome: () => React$Node = props => {
-  const [date, setDate] = useState();
+  const [date] = useState();
+  const [fadeAnim] = useState(new Animated.Value(0));
+  const [scrollX] = useState(new Animated.Value(0));
+
+  const buildAnimatedTiming = (value, toValue, duration) =>
+    Animated.timing(value, {
+      toValue,
+      duration,
+    }).start();
+
+  useEffect(() => {
+    buildAnimatedTiming(fadeAnim, 1, 1000);
+  }, [fadeAnim]);
   const renderIllustrations = () => {
     const { illustrations } = props;
     return (
@@ -27,16 +45,41 @@ const Welcome: () => React$Node = props => {
             style={styles.image}
           />
         )}
+        onScroll={Animated.event([
+          {
+            nativeEvent: { contentOffset: { x: scrollX } },
+          },
+        ])}
       />
     );
   };
-  const renderSteps = () => (
-    <Block>
-      <Text>* * *</Text>
-    </Block>
-  );
+  const renderSteps = () => {
+    const { illustrations } = props;
+    const stepPosition = Animated.divide(scrollX, width);
+    return (
+      <Block row center middle style={styles.stepContainer}>
+        {illustrations.map((item, index) => {
+          const opacity = stepPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [0.4, 1, 0.4],
+            extrapolate: 'clamp',
+          });
+          return (
+            <Block
+              animated
+              flex={false}
+              key={`step-${index}`}
+              style={[styles.steps, { opacity }]}
+              color="gray"
+            />
+          );
+        })}
+      </Block>
+    );
+  };
+
   return (
-    <Block>
+    <Block animated style={{ opacity: fadeAnim }}>
       <Block center bottom flex={0.4}>
         <Text h1 center bold>
           Tour Home.
@@ -93,6 +136,18 @@ const styles = StyleSheet.create({
   image: {
     width,
     height: height / 2,
+  },
+  stepContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  steps: {
+    width: 5,
+    height: 5,
+    borderRadius: 5,
+    marginHorizontal: 2.5,
   },
 });
 

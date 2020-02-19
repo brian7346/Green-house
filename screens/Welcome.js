@@ -5,7 +5,7 @@ import { theme } from '../constants';
 
 const { width, height } = Dimensions.get('window');
 
-const Welcome = props => {
+const Welcome: () => React$Node = props => {
   const [date, setDate] = useState();
   const renderIllustrations = () => {
     const { illustrations } = props;
@@ -37,7 +37,7 @@ const Welcome = props => {
   );
   return (
     <Block>
-      <Block center middle>
+      <Block center bottom flex={0.4}>
         <Text h1 center bold>
           Tour Home.
           <Text h1 primary>
@@ -52,7 +52,7 @@ const Welcome = props => {
         {renderIllustrations()}
         {renderSteps()}
       </Block>
-      <Block middle margin={theme.sizes.padding * 2}>
+      <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
         <Button color="primary" onPress={() => null}>
           <Text center semibold white>
             Login

@@ -1,98 +1,150 @@
+//@flow
 import React from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
 import { theme } from '../constants';
 
-export default function Block(props) {
+type Props = {
+  flex?: number,
+  row?: boolean,
+  column?: boolean,
+  center?: boolean,
+  middle?: boolean,
+  left: boolean,
+  right?: boolean,
+  top?: boolean,
+  bottom?: boolean,
+  card?: boolean,
+  shadow?: boolean,
+  color?: string,
+  space?: string,
+  padding?: number | [number],
+  margin?: number | [number],
+  animated?: boolean,
+  wrap?: boolean,
+  style?: any,
+  children: any,
+};
+
+type marginType = {
+  marginTop: number,
+  marginRight: number,
+  marginBottom: number,
+  marginLeft: number,
+};
+
+type paddingType = {
+  paddingTop: number,
+  paddingRight: number,
+  paddingBottom: number,
+  paddingLeft: number,
+};
+
+export default function Block(props: Props): React$Node {
   const handleMargins = () => {
     const { margin } = props;
-    if (typeof margin === 'number') {
-      return {
-        marginTop: margin,
-        marginRight: margin,
-        marginBottom: margin,
-        marginLeft: margin,
-      };
-    }
 
-    if (typeof margin === 'object') {
-      const marginSize = Object.keys(margin).length;
+    const marginIsNumber = (marginValue: number): marginType => ({
+      marginTop: marginValue,
+      marginRight: marginValue,
+      marginBottom: marginValue,
+      marginLeft: marginValue,
+    });
+
+    const marginIsObject = (marginObject: any): marginType => {
+      const marginSize: number = Object.keys(marginObject).length;
+
       switch (marginSize) {
         case 1:
           return {
-            marginTop: margin[0],
-            marginRight: margin[0],
-            marginBottom: margin[0],
-            marginLeft: margin[0],
+            marginTop: marginObject[0],
+            marginRight: marginObject[0],
+            marginBottom: marginObject[0],
+            marginLeft: marginObject[0],
           };
         case 2:
           return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[0],
-            marginLeft: margin[1],
+            marginTop: marginObject[0],
+            marginRight: marginObject[1],
+            marginBottom: marginObject[0],
+            marginLeft: marginObject[1],
           };
         case 3:
           return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[2],
-            marginLeft: margin[1],
+            marginTop: marginObject[0],
+            marginRight: marginObject[1],
+            marginBottom: marginObject[2],
+            marginLeft: marginObject[1],
           };
         default:
           return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[2],
-            marginLeft: margin[3],
+            marginTop: marginObject[0],
+            marginRight: marginObject[1],
+            marginBottom: marginObject[2],
+            marginLeft: marginObject[3],
           };
       }
+    };
+
+    if (typeof margin === 'number') {
+      return marginIsNumber(margin);
+    }
+
+    if (typeof margin === 'object') {
+      return marginIsObject(margin);
     }
   };
 
   const handlePaddings = () => {
     const { padding } = props;
-    if (typeof padding === 'number') {
-      return {
-        paddingTop: padding,
-        paddingRight: padding,
-        paddingBottom: padding,
-        paddingLeft: padding,
-      };
-    }
 
-    if (typeof padding === 'object') {
-      const paddingSize = Object.keys(padding).length;
+    const paddingIsNumber = (paddingValue: number): paddingType => ({
+      paddingTop: paddingValue,
+      paddingRight: paddingValue,
+      paddingBottom: paddingValue,
+      paddingLeft: paddingValue,
+    });
+
+    const paddingIsObject = (paddingObject: any): paddingType => {
+      const paddingSize: number = Object.keys(paddingObject).length;
       switch (paddingSize) {
         case 1:
           return {
-            paddingTop: padding[0],
-            paddingRight: padding[0],
-            paddingBottom: padding[0],
-            paddingLeft: padding[0],
+            paddingTop: paddingObject[0],
+            paddingRight: paddingObject[0],
+            paddingBottom: paddingObject[0],
+            paddingLeft: paddingObject[0],
           };
         case 2:
           return {
-            paddingTop: padding[0],
-            paddingRight: padding[1],
-            paddingBottom: padding[0],
-            paddingLeft: padding[1],
+            paddingTop: paddingObject[0],
+            paddingRight: paddingObject[1],
+            paddingBottom: paddingObject[0],
+            paddingLeft: paddingObject[1],
           };
         case 3:
           return {
-            paddingTop: padding[0],
-            paddingRight: padding[1],
-            paddingBottom: padding[2],
-            paddingLeft: padding[1],
+            paddingTop: paddingObject[0],
+            paddingRight: paddingObject[1],
+            paddingBottom: paddingObject[2],
+            paddingLeft: paddingObject[1],
           };
         default:
           return {
-            paddingTop: padding[0],
-            paddingRight: padding[1],
-            paddingBottom: padding[2],
-            paddingLeft: padding[3],
+            paddingTop: paddingObject[0],
+            paddingRight: paddingObject[1],
+            paddingBottom: paddingObject[2],
+            paddingLeft: paddingObject[3],
           };
       }
+    };
+
+    if (typeof padding === 'number') {
+      return paddingIsNumber(padding);
+    }
+
+    if (typeof padding === 'object') {
+      return paddingIsObject(padding);
     }
   };
 
@@ -118,7 +170,7 @@ export default function Block(props) {
     children,
   } = props;
 
-  const blockStyles = [
+  const blockStyles: any = [
     styles.block,
     flex && { flex },
     flex === false && { flex: 0 }, // reset / disable flex
@@ -142,18 +194,10 @@ export default function Block(props) {
   ];
 
   if (animated) {
-    return (
-      <Animated.View style={blockStyles} {...props}>
-        {children}
-      </Animated.View>
-    );
+    return <Animated.View style={blockStyles}>{children}</Animated.View>;
   }
 
-  return (
-    <View style={blockStyles} {...props}>
-      {children}
-    </View>
-  );
+  return <View style={blockStyles}>{children}</View>;
 }
 
 export const styles = StyleSheet.create({

@@ -50,9 +50,7 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [lints]
-sketchy-null-number=warn
 sketchy-null-mixed=warn
-sketchy-number=warn
 untyped-type-import=warn
 nonstrict-import=warn
 deprecated-type=warn
@@ -72,4 +70,4 @@ untyped-import
 untyped-type-import
 
 [version]
-^0.105.0
+^0.107.0

@@ -84,9 +84,16 @@ const Welcome: () => React$Node = props => {
   const renderTermsService = () => {
     return (
       <Modal animationType="slide" visible={showTerms}>
-        <Block space="evenly" padding={theme.sizes.padding}>
+        <Block
+          space="between"
+          padding={[theme.sizes.padding * 2, theme.sizes.padding]}>
           <Text h2 light>
             Terms of service
+          </Text>
+          <Text caption gray height={18}>
+            Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+            pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+            pariatur. Elit nostrud amet ex quis.
           </Text>
           <Button color="primary" onPress={() => setShowTerms(false)}>
             <Text center white>

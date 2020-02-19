@@ -84,7 +84,16 @@ const Welcome: () => React$Node = props => {
   const renderTermsService = () => {
     return (
       <Modal animationType="slide" visible={showTerms}>
-        <Text>Modal</Text>
+        <Block space="evenly" padding={theme.sizes.padding}>
+          <Text h2 light>
+            Terms of service
+          </Text>
+          <Button color="primary" onPress={() => setShowTerms(false)}>
+            <Text center white>
+              I understand
+            </Text>
+          </Button>
+        </Block>
       </Modal>
     );
   };

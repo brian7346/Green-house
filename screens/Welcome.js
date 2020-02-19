@@ -14,7 +14,7 @@ const Welcome: () => React$Node = props => {
         horizontal
         paddingEnabled
         scrollEnabled
-        showHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
         snapToAlignment="center"
         data={illustrations}

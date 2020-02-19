@@ -151,7 +151,7 @@ const Welcome: () => React$Node = props => {
         {renderSteps()}
       </Block>
       <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
-        <Button color="primary" onPress={() => navigation.navigate('Signup')}>
+        <Button color="primary" onPress={() => navigation.navigate('Login')}>
           <Text center semibold white>
             Login
           </Text>

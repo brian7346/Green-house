@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   Modal,
+  ScrollView,
 } from 'react-native';
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
@@ -90,11 +91,38 @@ const Welcome: () => React$Node = props => {
           <Text h2 light>
             Terms of service
           </Text>
-          <Text caption gray height={18}>
-            Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
-            pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
-            pariatur. Elit nostrud amet ex quis.
-          </Text>
+          <ScrollView style={styles.termsOfServiceList}>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+            <Text caption gray height={18}>
+              Incididunt proident velit dolor eiusmod.Esse culpa in excepteur
+              pariatur reprehenderit nostrud. Elit irure tempor aliquip quis
+              pariatur. Elit nostrud amet ex quis.
+            </Text>
+          </ScrollView>
           <Button color="primary" onPress={() => setShowTerms(false)}>
             <Text center white>
               I understand
@@ -176,6 +204,9 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 5,
     marginHorizontal: 2.5,
+  },
+  termsOfServiceList: {
+    paddingVertical: theme.sizes.padding,
   },
 });
 

@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { theme } from '../constants';
 
@@ -8,11 +8,11 @@ type Props = {
   color?: string,
   shadow?: boolean,
   style?: any,
-  children?: any,
+  children?: React.Node,
 };
 
-const Button = (props: Props): React$Node => {
-  const { style, color, shadow, children } = props;
+const Button = (props: Props): React.Node => {
+  const { style, color, shadow, children, opacity, ...rest } = props;
 
   const buttonStyles: Array<any> = [
     styles.button,
@@ -23,7 +23,7 @@ const Button = (props: Props): React$Node => {
   ];
 
   return (
-    <TouchableOpacity style={buttonStyles} {...props}>
+    <TouchableOpacity {...rest} style={buttonStyles}>
       {children}
     </TouchableOpacity>
   );

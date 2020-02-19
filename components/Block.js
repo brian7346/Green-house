@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
 import { theme } from '../constants';
@@ -23,7 +23,7 @@ type Props = {
   animated?: boolean,
   wrap?: boolean,
   style?: any,
-  children: any,
+  children: React.Node,
 };
 
 type marginType = {
@@ -40,7 +40,7 @@ type paddingType = {
   paddingLeft: number,
 };
 
-export default function Block(props: Props): React$Node {
+export default function Block(props: Props): React.Node {
   const handleMargins = () => {
     const { margin } = props;
 

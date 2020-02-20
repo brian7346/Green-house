@@ -56,6 +56,8 @@ export default function Input(props: Props) {
       return null;
     }
 
+    const iconName = !toggleSecure ? 'eye' : 'eye-slash';
+
     return (
       <Button
         style={styles.toggle}
@@ -63,7 +65,7 @@ export default function Input(props: Props) {
         {rightLabel ? (
           rightLabel
         ) : (
-          <Icon name="eye" size={25} color={theme.colors.primary} />
+          <Icon name={iconName} size={25} color={theme.colors.gray} />
         )}
       </Button>
     );

@@ -1,18 +1,39 @@
 //@flow
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { theme } from '../constants';
 
 type Props = {
   opacity?: number,
   color?: string,
   shadow?: boolean,
+  gradient?: boolean,
   style?: any,
+  start?: any,
+  end?: any,
+  locations?: Array<number>,
+  startColor: string,
+  endColor: string,
   children?: React.Node,
 };
 
 const Button = (props: Props): React.Node => {
-  const { style, color, shadow, children, opacity, ...rest } = props;
+  const {
+    style,
+    color,
+    shadow,
+    children,
+    opacity,
+    gradient,
+    start,
+    end,
+    locations,
+    startColor,
+    endColor,
+    ...rest
+  } = props;
 
   const buttonStyles: Array<any> = [
     styles.button,
@@ -22,6 +43,21 @@ const Button = (props: Props): React.Node => {
     style,
   ];
 
+  if (gradient) {
+    return (
+      <TouchableOpacity {...rest} style={buttonStyles}>
+        <LinearGradient
+          start={start}
+          end={end}
+          locations={locations}
+          style={buttonStyles}
+          colors={[startColor, endColor]}>
+          {children}
+        </LinearGradient>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <TouchableOpacity {...rest} style={buttonStyles}>
       {children}
@@ -30,6 +66,11 @@ const Button = (props: Props): React.Node => {
 };
 
 Button.defaultProps = {
+  startColor: theme.colors.primary,
+  endColor: theme.colors.secondary,
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 1 },
+  locations: [0.1, 0.9],
   opacity: 0.8,
   color: theme.colors.white,
 };

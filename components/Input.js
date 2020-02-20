@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,13 +7,12 @@ import Block from './Block';
 import Button from './Button';
 import { theme } from '../constants';
 
-export default class Input extends Component {
-  state = {
-    toggleSecure: false,
-  };
+export default function Input(props) {
+  const { email, phone, number, secure, error, style, ...rest } = props;
+  const [toggleSecure, setToggleSecure] = useState(false);
 
-  renderLabel() {
-    const { label, error } = this.props;
+  const renderLabel = () => {
+    const { label } = props;
 
     return (
       <Block flex={false}>
@@ -24,18 +23,19 @@ export default class Input extends Component {
         ) : null}
       </Block>
     );
-  }
+  };
 
-  renderToggle() {
-    const { secure, rightLabel } = this.props;
-    const { toggleSecure } = this.state;
+  const renderToggle = () => {
+    const { rightLabel } = props;
 
-    if (!secure) return null;
+    if (!secure) {
+      return null;
+    }
 
     return (
       <Button
         style={styles.toggle}
-        onPress={() => this.setState({ toggleSecure: !toggleSecure })}>
+        onPress={() => setToggleSecure(!toggleSecure)}>
         {rightLabel ? (
           rightLabel
         ) : (
@@ -43,12 +43,14 @@ export default class Input extends Component {
         )}
       </Button>
     );
-  }
+  };
 
-  renderRight() {
-    const { rightLabel, rightStyle, onRightPress } = this.props;
+  const renderRight = () => {
+    const { rightLabel, rightStyle, onRightPress } = props;
 
-    if (!rightLabel) return null;
+    if (!rightLabel) {
+      return null;
+    }
 
     return (
       <Button
@@ -57,45 +59,40 @@ export default class Input extends Component {
         {rightLabel}
       </Button>
     );
-  }
+  };
 
-  render() {
-    const { email, phone, number, secure, error, style, ...props } = this.props;
+  const isSecure = toggleSecure ? false : secure;
 
-    const { toggleSecure } = this.state;
-    const isSecure = toggleSecure ? false : secure;
+  const inputStyles = [
+    styles.input,
+    error && { borderColor: theme.colors.accent },
+    style,
+  ];
 
-    const inputStyles = [
-      styles.input,
-      error && { borderColor: theme.colors.accent },
-      style,
-    ];
+  const inputType = email
+    ? 'email-address'
+    : number
+    ? 'numeric'
+    : phone
+    ? 'phone-pad'
+    : 'default';
 
-    const inputType = email
-      ? 'email-address'
-      : number
-      ? 'numeric'
-      : phone
-      ? 'phone-pad'
-      : 'default';
-
-    return (
-      <Block flex={false} margin={[theme.sizes.base, 0]}>
-        {this.renderLabel()}
-        <TextInput
-          style={inputStyles}
-          secureTextEntry={isSecure}
-          autoComplete="off"
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType={inputType}
-          {...props}
-        />
-        {this.renderToggle()}
-        {this.renderRight()}
-      </Block>
-    );
-  }
+  return (
+    <Block flex={false} margin={[theme.sizes.base, 0]}>
+      {renderLabel()}
+      <TextInput
+        style={inputStyles}
+        secureTextEntry={isSecure}
+        autoComplete="off"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType={inputType}
+        {...rest}
+      />
+      {renderToggle()}
+      {renderRight()}
+    </Block>
+  );
 }
 
 const styles = StyleSheet.create({

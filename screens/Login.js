@@ -7,6 +7,10 @@ const Login = () => {
   const [email, setEmail] = React.useState('doctorbrian97@gmail.com');
   const [password, setPassword] = React.useState('11111111');
 
+  const setLogin = () => {
+    return null;
+  };
+
   return (
     <KeyboardAvoidingView style={styles.login} behavior="padding">
       <Block padding={[0, theme.sizes.base * 2]} flex color="white">
@@ -27,9 +31,15 @@ const Login = () => {
             defaultValue={password}
             onChangeText={pass => setPassword(pass)}
           />
-          <Button color="primary" gradient>
+          <Button color="primary" gradient onPress={() => setLogin()}>
             <Text bold white center>
               Login
+            </Text>
+          </Button>
+
+          <Button onPress={() => null}>
+            <Text style={styles.forgotText} gray caption center>
+              Forgot your password?
             </Text>
           </Button>
         </Block>
@@ -48,6 +58,9 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderBottomColor: theme.colors.gray2,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  forgotText: {
+    textDecorationLine: 'underline',
   },
 });
 

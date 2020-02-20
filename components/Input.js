@@ -1,3 +1,4 @@
+//@flow
 import React, { useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,13 +8,38 @@ import Block from './Block';
 import Button from './Button';
 import { theme } from '../constants';
 
-export default function Input(props) {
-  const { email, phone, number, secure, error, style, ...rest } = props;
+type Props = {
+  secure: boolean,
+  email?: boolean,
+  phone?: boolean,
+  number?: boolean,
+  autoComplete?: any,
+  error?: string,
+  label?: string,
+  rightLabel?: string,
+  rightStyle?: any,
+  onRightPress?: void,
+  style?: any,
+};
+
+export default function Input(props: Props) {
+  const {
+    email,
+    phone,
+    number,
+    secure,
+    error,
+    style,
+    label,
+    onRightPress,
+    rightLabel,
+    rightStyle,
+    autoComplete,
+    ...rest
+  } = props;
   const [toggleSecure, setToggleSecure] = useState(false);
 
   const renderLabel = () => {
-    const { label } = props;
-
     return (
       <Block flex={false}>
         {label ? (
@@ -26,8 +52,6 @@ export default function Input(props) {
   };
 
   const renderToggle = () => {
-    const { rightLabel } = props;
-
     if (!secure) {
       return null;
     }
@@ -46,8 +70,6 @@ export default function Input(props) {
   };
 
   const renderRight = () => {
-    const { rightLabel, rightStyle, onRightPress } = props;
-
     if (!rightLabel) {
       return null;
     }
@@ -61,9 +83,9 @@ export default function Input(props) {
     );
   };
 
-  const isSecure = toggleSecure ? false : secure;
+  const isSecure: boolean = toggleSecure ? false : secure;
 
-  const inputStyles = [
+  const inputStyles: Array<any> = [
     styles.input,
     error && { borderColor: theme.colors.accent },
     style,
@@ -81,13 +103,12 @@ export default function Input(props) {
     <Block flex={false} margin={[theme.sizes.base, 0]}>
       {renderLabel()}
       <TextInput
+        {...rest}
         style={inputStyles}
         secureTextEntry={isSecure}
-        autoComplete="off"
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType={inputType}
-        {...rest}
       />
       {renderToggle()}
       {renderRight()}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Block, Text, Button, Input } from '../components';
+import { Block, Text, Input } from '../components';
 import { theme } from '../constants';
 
 const Login = () => {

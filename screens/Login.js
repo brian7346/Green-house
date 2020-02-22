@@ -12,8 +12,7 @@ const Login = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.login} behavior="padding">
-      <Block padding={[0, theme.sizes.base * 2]} flex color="white">
+      <Block padding={[0, theme.sizes.base * 2]} color="white">
         <Text h1 bold>
           Login
         </Text>
@@ -44,7 +43,6 @@ const Login = () => {
           </Button>
         </Block>
       </Block>
-    </KeyboardAvoidingView>
   );
 };
 

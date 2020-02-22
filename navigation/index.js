@@ -20,7 +20,8 @@ const screens = createStackNavigator(
         height: theme.sizes.base * 6,
         backgroundColor: theme.colors.white,
         shadowColor: 'transparent',
-        elevalion: 0,
+        borderBottomColor: 'transparent',
+        elevation: 0
       },
       headerBackImage: <Image source={require('../assets/icons/back.png')} />,
       headerLeftContainerStyle: {
